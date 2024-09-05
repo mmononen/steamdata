@@ -1,0 +1,8 @@
+# Ignore environment and package directories
+venv/
+node_modules/
+
+# Ignore temporary or backup files
+*.log
+*.tmp
+*.bak
