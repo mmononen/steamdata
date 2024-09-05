@@ -9,6 +9,8 @@
    - Found under `src/javascript/steamdb-connector.js`.
    - Use `npm install mysql2` to install the necessary dependency.
 
+## Password from Roy
+
 ## Helper Functions
 
 - `fetchAllGames()`: Fetches all games from the database.
