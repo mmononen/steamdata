@@ -6,3 +6,9 @@ node_modules/
 *.log
 *.tmp
 *.bak
+
+# Ignore large dataset in the data folder
+data/games_may2024_cleaned
+
+# Ignore node_modules
+node_modules/
