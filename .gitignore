@@ -6,3 +6,9 @@ node_modules/
 *.log
 *.tmp
 *.bak
+
+# Ignore large datasets
+data/games_may2024_cleaned.csv
+
+# Ignore Node and MySQL2
+/node_modules
