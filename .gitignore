@@ -10,8 +10,9 @@ db-config.json
 *.tmp
 *.bak
 
-# Ignore all .csv files
+# Ignore all large files
 *.csv
+*.zip
 
 # Ignore node_modules
 node_modules/
