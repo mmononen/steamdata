@@ -13,3 +13,4 @@ data/games_may2024_cleaned
 # Ignore node_modules
 node_modules/
 python/games_may2024_cleaned.csv
+python/recent_indies.json
