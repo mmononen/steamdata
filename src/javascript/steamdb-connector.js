@@ -2,22 +2,26 @@
 // npm install mysql2
 
 const mysql = require("mysql2");
+const fs = require("fs");
+const path = require("path");
 
-// Connection details
-const connection = mysql.createConnection({
-	host: "86.60.209.30",
-	user: "remoteuser",
-	password: "***",
-	database: "indie_games_db",
-	port: 3306,
-});
+// Read the db-config.json file to get connection details
+const configPath = path.join(__dirname, "db-config.json");
+const config = JSON.parse(fs.readFileSync(configPath, "utf8"));
 
-// Helper function to fetch all games
+// Create the MySQL connection (open once)
+const connection = mysql.createConnection(config);
+
+// Helper function to fetch all games from the database
 function fetchAllGames() {
-	const query = "SELECT * FROM steam_games;";
+	const query = `
+        SELECT appid, name, release_date, genres, tags, pct_pos_total, pct_pos_recent, 
+               windows, mac, linux, metacritic_score, categories, estimated_owners, ccu, price
+        FROM indie_games;
+    `;
 	connection.query(query, (err, results) => {
 		if (err) {
-			console.error("Error fetching all games:", err);
+			console.error("Error fetching games:", err);
 			return;
 		}
 		console.log("All games:", results);
@@ -26,7 +30,7 @@ function fetchAllGames() {
 
 // Helper function to fetch a game by appid
 function fetchGameByAppid(appid) {
-	const query = "SELECT * FROM steam_games WHERE appid = ?;";
+	const query = "SELECT * FROM indie_games WHERE appid = ?;";
 	connection.query(query, [appid], (err, result) => {
 		if (err) {
 			console.error("Error fetching game:", err);
@@ -36,56 +40,39 @@ function fetchGameByAppid(appid) {
 	});
 }
 
-// Helper function to insert a new game
-// Check README.md for more information
-function insertGame(gameData) {
+// Helper function to search games by genre or tag
+function searchGamesByFilter(filter) {
 	const query = `
-    INSERT INTO steam_games (
-      appid, name, developer, publisher, score_rank, positive, negative, userscore, owners, 
-      average_forever, average_2weeks, median_forever, median_2weeks, price, initialprice, discount, ccu
-    ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);
-  `;
-	connection.query(query, gameData, (err, result) => {
+        SELECT appid, name, release_date, genres, tags, pct_pos_total, pct_pos_recent, 
+               windows, mac, linux, metacritic_score, categories, estimated_owners, ccu, price
+        FROM indie_games
+        WHERE genres LIKE ? OR tags LIKE ?;
+    `;
+	connection.query(query, [`%${filter}%`, `%${filter}%`], (err, results) => {
 		if (err) {
-			console.error("Error inserting game:", err);
+			console.error("Error searching games by filter:", err);
 			return;
 		}
-		console.log("Game inserted successfully.");
+		console.log(`Games matching the filter "${filter}":`, results);
 	});
 }
 
-// Helper function to update game data
-function updateGame(appid, field, value) {
-	const query = `UPDATE steam_games SET ${field} = ? WHERE appid = ?;`;
-	connection.query(query, [value, appid], (err, result) => {
+// Close the connection when all database operations are done
+function closeConnection() {
+	connection.end((err) => {
 		if (err) {
-			console.error("Error updating game:", err);
+			console.error("Error closing the connection:", err);
 			return;
 		}
-		console.log(`Game with appid ${appid} updated successfully.`);
-	});
-}
-
-// Helper function to delete a game by appid
-function deleteGame(appid) {
-	const query = "DELETE FROM steam_games WHERE appid = ?;";
-	connection.query(query, [appid], (err, result) => {
-		if (err) {
-			console.error("Error deleting game:", err);
-			return;
-		}
-		console.log(`Game with appid ${appid} deleted successfully.`);
+		console.log("Database connection closed.");
 	});
 }
 
 // Example usage
 // Uncomment the lines below to test the functions
-
 // fetchAllGames();
 // fetchGameByAppid(10);
-// insertGame([10, 'Counter-Strike', 'Valve', 'Valve', null, 234220, 6172, 0, '10,000,000 .. 20,000,000', 15339, 2792, 209, 117, 9.99, 9.99, 0, 10444]);
-// updateGame(10, 'name', 'Updated Game Name');
-// deleteGame(10);
+// searchGamesByFilter('RPG');
 
-// Close the connection when done
-// connection.end();
+// Once you are done, call this to close the connection
+closeConnection();

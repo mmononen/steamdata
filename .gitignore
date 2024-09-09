@@ -2,6 +2,9 @@
 venv/
 node_modules/
 
+# Ignore db connection details
+db-config.json
+
 # Ignore temporary or backup files
 *.log
 *.tmp

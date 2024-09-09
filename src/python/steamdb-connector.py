@@ -2,21 +2,26 @@
 # pip install mysql-connector-python
 
 import mysql.connector
+import json
+
+# Load configuration from JSON
+with open('db_config.json', 'r') as config_file:
+    config = json.load(config_file)
 
 # Connection details
 conn = mysql.connector.connect(
-    host="86.60.209.30",
-    user="remoteuser",
-    password="***",
-    database="indie_games_db",
-    port=3306
+    host=config['host'],
+    user=config['user'],
+    password=config['password'],
+    database=config['database'],
+    port=config['port']
 )
 
 cursor = conn.cursor()
 
 # Helper function to fetch all games
 def fetch_all_games():
-    query = "SELECT * FROM steam_games;"
+    query = "SELECT * FROM indie_games;"
     cursor.execute(query)
     result = cursor.fetchall()
     for row in result:
@@ -24,18 +29,17 @@ def fetch_all_games():
 
 # Helper function to fetch a game by appid
 def fetch_game_by_appid(appid):
-    query = "SELECT * FROM steam_games WHERE appid = %s;"
+    query = "SELECT * FROM indie_games WHERE appid = %s;"
     cursor.execute(query, (appid,))
     result = cursor.fetchone()
     print(result)
 
 # Helper function to insert a new game
-# Check README.md for more information
 def insert_game(game_data):
     query = """
-    INSERT INTO steam_games (appid, name, developer, publisher, score_rank, positive, negative, userscore, owners, 
-    average_forever, average_2weeks, median_forever, median_2weeks, price, initialprice, discount, ccu) 
-    VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s);
+    INSERT INTO indie_games (appid, name, release_date, genres, tags, pct_pos_total, pct_pos_recent, 
+    windows, mac, linux, metacritic_score, categories, estimated_owners, ccu, price) 
+    VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s);
     """
     cursor.execute(query, game_data)
     conn.commit()
@@ -43,14 +47,14 @@ def insert_game(game_data):
 
 # Helper function to update game data
 def update_game(appid, field, value):
-    query = f"UPDATE steam_games SET {field} = %s WHERE appid = %s;"
+    query = f"UPDATE indie_games SET {field} = %s WHERE appid = %s;"
     cursor.execute(query, (value, appid))
     conn.commit()
     print(f"Game with appid {appid} updated successfully.")
 
 # Helper function to delete a game by appid
 def delete_game(appid):
-    query = "DELETE FROM steam_games WHERE appid = %s;"
+    query = "DELETE FROM indie_games WHERE appid = %s;"
     cursor.execute(query, (appid,))
     conn.commit()
     print(f"Game with appid {appid} deleted successfully.")
@@ -59,9 +63,9 @@ def delete_game(appid):
 # Uncomment these lines to use the functions
 # fetch_all_games()
 # fetch_game_by_appid(0000)
-# insert_game((0000, 'New Game', 'New Dev', 'New Publisher', None, 000, 10, 0, '0,000,000 .. 0,000,000', 0000, 000, 00, 00, 0.00, 00.00, 0, 0000))
+# insert_game((0000, 'New Game', '2021-01-01', 'Action, Adventure', 'Indie', 95.00, 93.00, 1, 1, 0, 85, 'Single-player', '10,000 - 50,000', 1000, 19.99))
 # update_game(0000, 'name', 'Updated Game Name')
 # delete_game(0000)
 
 # Close the connection when done
-# conn.close()
+conn.close()
