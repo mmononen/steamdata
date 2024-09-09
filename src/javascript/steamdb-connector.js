@@ -6,8 +6,15 @@ const fs = require("fs");
 const path = require("path");
 
 // Read the db-config.json file to get connection details
-const configPath = path.join(__dirname, "db-config.json");
+const configPath = path.join(__dirname, "../../db-config.json");
 const config = JSON.parse(fs.readFileSync(configPath, "utf8"));
+
+// Check if SSL settings exist in the config
+if (config.ssl && config.ssl["ssl-mode"] === "REQUIRED") {
+	config.ssl = {
+		rejectUnauthorized: true, // You can set this to false for testing
+	};
+}
 
 // Create the MySQL connection (open once)
 const connection = mysql.createConnection(config);
@@ -68,6 +75,11 @@ function closeConnection() {
 	});
 }
 
+module.exports = {
+	fetchAllGames,
+	fetchGameByAppid,
+	searchGamesByFilter,
+};
 // Example usage
 // Uncomment the lines below to test the functions
 // fetchAllGames();
@@ -75,4 +87,4 @@ function closeConnection() {
 // searchGamesByFilter('RPG');
 
 // Once you are done, call this to close the connection
-closeConnection();
+// closeConnection();
