@@ -4,7 +4,12 @@ Kun indie-pelinkehittäjällä on käytössään data tämän vuosikymmenen indi
 ## Datasta yhteisesti katsottavat asiat:
 
 ### 0. Tilastot
-    - viiva, ranskalainen
+    - pelien määrä per datasetti
+    - top5 genret
+    - top5 tagit
+    - ilmaisten pelien prosenttiosuus
+    - moninpelit vs. yksinpelit / moninpelihybridit vs. yksinpelihybridit
+    - käyttöjärjestelmien / alustojen prosenttiosuus
 
 ### 1. Pelin suosion ja arvostelujen yhteys:
 
