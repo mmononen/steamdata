@@ -17,3 +17,6 @@ db-config.json
 # Ignore node_modules
 node_modules/
 python/recent_indies.json
+
+# Ignore extension rules
+*.prettierignore

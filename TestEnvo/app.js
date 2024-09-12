@@ -45,17 +45,17 @@ function displayResult(data) {
 }
 
 // Fetch all games, but display only the first 10
-async function fetchFirst10Games() {
-	try {
-		const response = await fetch("http://localhost:3000/games");
-		const data = await response.json();
+// async function fetchFirst10Games() {
+// 	try {
+// 		const response = await fetch("http://localhost:3000/games");
+// 		const data = await response.json();
 
-		// Display the first 10 games dynamically
-		displayResult(data);
-	} catch (error) {
-		console.error("Error fetching all games:", error);
-	}
-}
+// 		// Display the first 10 games dynamically
+// 		displayResult(data);
+// 	} catch (error) {
+// 		console.error("Error fetching all games:", error);
+// 	}
+// }
 
 // Search by AppID entered in the input field
 async function searchByAppId() {

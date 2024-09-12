@@ -1,0 +1,85 @@
+<style>
+  body {
+    background-color: #383636;
+    color: white;
+  }
+</style>
+
+<div class="mermaid">
+  flowchart BT;
+  %%{
+    init: {
+      'theme': 'base',
+      'themeVariables': {
+        'fontSize': '30px',
+        'primaryBorderColor': 'black',
+        'lineColor': 'white',
+        'tertiaryColor': '#f5f5f5'
+      }
+    }
+  }%%
+
+  %% Define components
+  A[Steam APIs]:::apiStyle
+  B[New Backend?]:::ideaStyle
+  C{{Azure Cloud}}:::cloudStyle
+  D[(Database)]:::dbStyle
+  E[[Frontend]]:::frontendStyle
+  F[Power BI]:::biStyle
+  G[[Data Presentation]]:::frontendStyle
+
+  %% Define technologies
+  T1[Python?]:::ideaStyle
+  T2[C# & Win Forms?]:::ideaStyle
+  T4[SQL]:::techStyle
+  T5[HTML
+  CSS
+  JavaScript]:::techStyle
+  T6[Node.js?]:::ideaStyle
+
+  %% Diagram connections
+  A --->|Raw Data| B
+  B --->|Clean Data| C
+  C --->|Stored Data| D
+  C <--->|Data & Queries| E
+  C <--->|Data & Queries| F
+  F --->|Reporting| G
+  
+  %% Technology associations
+  A --- T1
+  B --- T2
+  C --- T4
+  D --- T4
+  E --- T5
+  E --- T6
+
+  %% Apply custom styles
+  classDef apiStyle fill:black, color:white, rx:15,ry:15, padding:15px;
+  classDef backendStyle fill:blue, rx:15,ry:15, padding:15px;
+  classDef cloudStyle fill:lightblue, rx:15,ry:15, padding:15px;
+  classDef dbStyle fill:purple, color:white, rx:15,ry:15, padding:15px;
+  classDef frontendStyle fill:coral, rx:15,ry:15, padding:15px;
+  classDef biStyle fill:yellow, padding:15px;
+  classDef ideaStyle fill:lightgreen, rx:15,ry:15, padding:15px;
+  classDef techStyle fill:green, color:white, rx:15,ry:15, padding:18px;
+</div>
+
+<div style="font-size: 24px;">
+  <h3>Color Key:</h3>
+  <ul>
+    <li><span style="color: black; font-weight: bold;">Black</span>: External APIs</li>
+    <li><span style="color: lightgreen; font-weight: bold;">Light Green</span>: Ideas</li>
+    <li><span style="color: lightblue; font-weight: bold;">Light Blue</span>: Server</li>
+    <li><span style="color: purple; font-weight: bold;">Purple</span>: Database</li>
+    <li><span style="color: coral; font-weight: bold;">Coral</span>: Frontend</li>
+    <li><span style="color: green; font-weight: bold;">Green</span>: Technologies</li>
+    <!-- <li><span style="color: #90caf9; font-weight: bold;">Blue</span>: Backend</li> -->
+  </ul>
+</div>
+
+<script type="module">
+  import mermaid from "https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs";
+  mermaid.initialize({
+    startOnLoad: true
+  });
+</script>
