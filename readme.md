@@ -4,7 +4,7 @@ Kun indie-pelinkehittäjällä on käytössään data tämän vuosikymmenen indi
 ## Datasta yhteisesti katsottavat asiat:
 
 ```
-'AppID':
+['AppID']: {
 	'name', 
 	'release_date', 
 	'required_age', 
@@ -23,7 +23,8 @@ Kun indie-pelinkehittäjällä on käytössään data tämän vuosikymmenen indi
     	'peak_ccu',
 	'tags',
     	'pct_pos_total',
-	'num_reviews_total']
+	'num_reviews_total'
+}
 ```
  
 ### 0. Tilastot
