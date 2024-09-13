@@ -1,85 +1,137 @@
 <style>
-  body {
-    background-color: #383636;
-    color: white;
-  }
-</style>
-
-<div class="mermaid">
-  flowchart BT;
-  %%{
-    init: {
+	body {
+	  background-color: #383636;
+	  color: white;
+	}
+  </style>
+  
+  <div class="mermaid">
+    flowchart BT;
+    %%{
+      init: {
       'theme': 'base',
       'themeVariables': {
-        'fontSize': '30px',
+        'fontSize': '24px',
         'primaryBorderColor': 'black',
-        'lineColor': 'white',
-        'tertiaryColor': '#f5f5f5'
+        'lineColor': 'white'
       }
-    }
-  }%%
+      }
+    }%%
+    
+    %% Define components
+    A[Steam APIs]:::apiStyle
+    A1[Kaggle Data]:::apiStyle
+    B[New Backend?]:::ideaStyle
+    C{{MySQL Server}}:::cloudStyle
+    D[(Database)]:::dbStyle
+    D1[(Local Storage)]:::dbStyle
+    E[[Frontend]]:::frontStyle
+    F[Power BI]:::toolStyle
+    G>Indie Data Presentation]:::frontStyle
+    H[Data Conversion]:::backStyle
+    H1[Data Preprocessing]:::backStyle
+    I[Data Filter]:::backStyle
+    J>Large Data Presentation]:::frontStyle
+    M[Data Migration]:::backStyle
+    K[Data Comparison]:::backStyle
+    L[How?]:::uncerStyle
+    L1[How?]:::uncerStyle
+    
+    %% Define technologies
+    T1A[Jupyter Notebook]:::techStyle
+    T1[Python]:::langStyle
+    T2[C# & Win Forms?]:::ideaStyle
+    T4[SQL]:::langStyle
+    T5[HTML
+    CSS
+    JavaScript]:::langStyle
+    T6[Node.js?]:::ideaStyle
+    T9[Streamlit]:::frameStyle
+    T10[Azure Data Studio]:::toolStyle
 
-  %% Define components
-  A[Steam APIs]:::apiStyle
-  B[New Backend?]:::ideaStyle
-  C{{Azure Cloud}}:::cloudStyle
-  D[(Database)]:::dbStyle
-  E[[Frontend]]:::frontendStyle
-  F[Power BI]:::biStyle
-  G[[Data Presentation]]:::frontendStyle
+    
+    %% Diagram connections
+    A ---->|Raw Data| B
+    A1 ---->|Raw Data .csv| D1
+    B -->|Clean Data| C
+    C <--->|Data & Queries| F
+    D1 ---->|Raw Data .csv| H1
+    H1 ---->|Preprocessed Data .csv| I
+    I ---->|Filtered Data .csv| H
+    H -->|Converted Data .json| M
+    H -->|Converted Data .json| D1
+    M -->|Clean Data| C
+    D1 --->|Clean data .csv?| T9
+    L1 --> B
+    F & T9 -->|Reporting| pres
+    
+    %% Technology associations
+    B --- T2
+    C --- T10
+    H1 --- T1A
+    H & T1A & I & T9 --- T1
+    M & T10 --- T4
 
-  %% Define technologies
-  T1[Python?]:::ideaStyle
-  T2[C# & Win Forms?]:::ideaStyle
-  T4[SQL]:::techStyle
-  T5[HTML
-  CSS
-  JavaScript]:::techStyle
-  T6[Node.js?]:::ideaStyle
+    pres:::presStyle
 
-  %% Diagram connections
-  A --->|Raw Data| B
-  B --->|Clean Data| C
-  C --->|Stored Data| D
-  C <--->|Data & Queries| E
-  C <--->|Data & Queries| F
-  F --->|Reporting| G
+    %% Subgraph for Presentations
+    subgraph pres[Presentations]
+      J & G <--> K
+    end
+
+    azure:::presStyle
+
+    %% Subgraph for Azure Cloud
+    subgraph azure[Azure Cloud]
+    C -->|Stored Data| D
+    end
+
+    front:::presStyle
+
+    %% Subgraph for Front End
+    subgraph front[Front End]
+    L --> E
+    C <-->|Data & Queries| E
+    E --- T6 & T5
+    end
+    
+    classDef presStyle fill:darkgrey, stroke:#444, stroke-width:3px, color:#000, rx:15, ry:15, padding:25px;
+
+    %% Apply custom styles
+    classDef apiStyle fill:black, color:white, rx:15, ry:15, padding:15px;
+    classDef cloudStyle fill:cyan, color:black, padding:15px;
+    classDef ideaStyle fill:lightgreen, color:black, rx:15, ry:15, padding:15px;
+    classDef langStyle fill:blue, color:white, rx:15, ry:15, padding:15px;
+    classDef backStyle fill:darkblue, color:white, rx:15, ry:15, padding:15px;
+    classDef frontStyle fill:coral, color:white, rx:15, ry:15, padding:15px;
+    classDef frameStyle fill:purple, color:white, rx:15, ry:15, padding:15px;
+    classDef toolStyle fill:yellow, color:black, padding:15px;
+    classDef dbStyle fill:orange, color:black, padding:15px;
+    classDef techStyle fill:green, color:white, rx:15, ry:15, padding:18px;
+    classDef uncerStyle fill:red, color:white, rx:15, ry:15, padding:15px;
+  </div>
   
-  %% Technology associations
-  A --- T1
-  B --- T2
-  C --- T4
-  D --- T4
-  E --- T5
-  E --- T6
-
-  %% Apply custom styles
-  classDef apiStyle fill:black, color:white, rx:15,ry:15, padding:15px;
-  classDef backendStyle fill:blue, rx:15,ry:15, padding:15px;
-  classDef cloudStyle fill:lightblue, rx:15,ry:15, padding:15px;
-  classDef dbStyle fill:purple, color:white, rx:15,ry:15, padding:15px;
-  classDef frontendStyle fill:coral, rx:15,ry:15, padding:15px;
-  classDef biStyle fill:yellow, padding:15px;
-  classDef ideaStyle fill:lightgreen, rx:15,ry:15, padding:15px;
-  classDef techStyle fill:green, color:white, rx:15,ry:15, padding:18px;
-</div>
-
-<div style="font-size: 24px;">
-  <h3>Color Key:</h3>
-  <ul>
-    <li><span style="color: black; font-weight: bold;">Black</span>: External APIs</li>
-    <li><span style="color: lightgreen; font-weight: bold;">Light Green</span>: Ideas</li>
-    <li><span style="color: lightblue; font-weight: bold;">Light Blue</span>: Server</li>
-    <li><span style="color: purple; font-weight: bold;">Purple</span>: Database</li>
-    <li><span style="color: coral; font-weight: bold;">Coral</span>: Frontend</li>
-    <li><span style="color: green; font-weight: bold;">Green</span>: Technologies</li>
-    <!-- <li><span style="color: #90caf9; font-weight: bold;">Blue</span>: Backend</li> -->
-  </ul>
-</div>
-
-<script type="module">
-  import mermaid from "https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs";
-  mermaid.initialize({
-    startOnLoad: true
-  });
-</script>
+  <div style="font-size: 28px;">
+	<h3>Color Key:</h3>
+    <ul>
+      <li><span style="color: black; font-weight: bold;">Black</span>: APIs/Services</li>
+      <li><span style="color: cyan; font-weight: bold;">Light Blue</span>: Cloud Server</li>
+      <li><span style="color: lightgreen; font-weight: bold;">Light Green</span>: New Ideas</li>
+      <li><span style="color: blue; font-weight: bold;">Blue</span>: Languages</li>
+      <li><span style="color: darkblue; font-weight: bold;">Dark Blue</span>: Backend Processes</li>
+      <li><span style="color: coral; font-weight: bold;">Coral</span>: Frontend</li>
+      <li><span style="color: purple; font-weight: bold;">Purple</span>: Frameworks</li>
+      <li><span style="color: yellow; font-weight: bold;">Yellow</span>: Tools</li>
+      <li><span style="color: orange; font-weight: bold;">Orange</span>: Data Storage</li>
+      <li><span style="color: green; font-weight: bold;">Green</span>: Technologies</li>
+      <li><span style="color: red; font-weight: bold;">Red</span>: Uncertain Aspects</li>
+    </ul>
+  </div>
+  
+  <script type="module">
+	import mermaid from "https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs";
+	mermaid.initialize({
+	  startOnLoad: true
+	});
+  </script>
+  
