@@ -21,15 +21,18 @@
 
   %% Define components
   A[Steam APIs]:::apiStyle
+  A1[Kaggle Data]:::apiStyle
   B[New Backend?]:::ideaStyle
   C{{Azure Cloud}}:::cloudStyle
   D[(Database)]:::dbStyle
+  D1[(Local Storage)]:::dbStyle
   E[[Frontend]]:::frontendStyle
   F[Power BI]:::biStyle
   G[[Data Presentation]]:::frontendStyle
 
   %% Define technologies
-  T1[Python?]:::ideaStyle
+  T1A[Jupiter Notebook]:::techStyle
+  T1[Python]:::techStyle
   T2[C# & Win Forms?]:::ideaStyle
   T4[SQL]:::techStyle
   T5[HTML
@@ -39,6 +42,7 @@
 
   %% Diagram connections
   A --->|Raw Data| B
+  A1 --->|Raw Data| D1
   B --->|Clean Data| C
   C --->|Stored Data| D
   C <--->|Data & Queries| E
@@ -50,6 +54,8 @@
   B --- T2
   C --- T4
   D --- T4
+  D1 --- T1
+  D1 --- T1A
   E --- T5
   E --- T6
 
