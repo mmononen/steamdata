@@ -3,20 +3,22 @@
 	  background-color: #383636;
 	  color: white;
 	}
-  </style>
+
+  .subgraph rect {
+      padding-top: 50px;
+    }
+</style>
   
-  <div class="mermaid">
-    flowchart BT;
-    %%{
-      init: {
-      'theme': 'base',
+<div class="mermaid">
+    %%{ init : { 
+      "theme" : "base",
       'themeVariables': {
         'fontSize': '24px',
-        'primaryBorderColor': 'black',
-        'lineColor': 'white'
-      }
-      }
-    }%%
+        'lineColor': 'white'},
+      "flowchart" : { "curve" : "linear"}
+    }}%%
+
+    flowchart BT;
     
     %% Define components
     A[Steam APIs]:::apiStyle
@@ -57,11 +59,12 @@
     C <--->|Data & Queries| F
     D1 ---->|Raw Data .csv| H1
     H1 ---->|Preprocessed Data .csv| I
-    I ---->|Filtered Data .csv| H
+    I ---->|Indie Filtered Data .csv| H
+    I ---->|Filtered Data .csv| D1
     H -->|Converted Data .json| M
     H -->|Converted Data .json| D1
     M -->|Clean Data| C
-    D1 --->|Clean data .csv?| T9
+    D1 --->|Filtered Data .csv| T9
     L1 --> B
     F & T9 -->|Reporting| pres
     
@@ -72,46 +75,47 @@
     H & T1A & I & T9 --- T1
     M & T10 --- T4
 
-    pres:::presStyle
+    pres:::subStyle
 
     %% Subgraph for Presentations
-    subgraph pres[Presentations]
+    subgraph pres [Presentations]
       J & G <--> K
     end
 
-    azure:::presStyle
+    azure:::subStyle
 
     %% Subgraph for Azure Cloud
-    subgraph azure[Azure Cloud]
-    C -->|Stored Data| D
+    subgraph azure [Azure Cloud]
+    C <-->|Stored Data| D
     end
 
-    front:::presStyle
+    front:::subStyle
 
     %% Subgraph for Front End
-    subgraph front[Front End]
+    subgraph front [Front End]
     L --> E
     C <-->|Data & Queries| E
     E --- T6 & T5
     end
     
-    classDef presStyle fill:darkgrey, stroke:#444, stroke-width:3px, color:#000, rx:15, ry:15, padding:25px;
-
+    
     %% Apply custom styles
-    classDef apiStyle fill:black, color:white, rx:15, ry:15, padding:15px;
-    classDef cloudStyle fill:cyan, color:black, padding:15px;
-    classDef ideaStyle fill:lightgreen, color:black, rx:15, ry:15, padding:15px;
-    classDef langStyle fill:blue, color:white, rx:15, ry:15, padding:15px;
-    classDef backStyle fill:darkblue, color:white, rx:15, ry:15, padding:15px;
-    classDef frontStyle fill:coral, color:white, rx:15, ry:15, padding:15px;
-    classDef frameStyle fill:purple, color:white, rx:15, ry:15, padding:15px;
-    classDef toolStyle fill:yellow, color:black, padding:15px;
-    classDef dbStyle fill:orange, color:black, padding:15px;
-    classDef techStyle fill:green, color:white, rx:15, ry:15, padding:18px;
-    classDef uncerStyle fill:red, color:white, rx:15, ry:15, padding:15px;
-  </div>
+    classDef paddingStyle fill:none, stroke:none;
+    classDef subStyle fill:darkgrey, rx:15, ry:15, stroke:black, stroke-width:3px;
+    classDef apiStyle fill:black, color:white, rx:15, ry:15, stroke:black, stroke-width:3px, margin:15px;
+    classDef cloudStyle fill:cyan, color:black, stroke:black, stroke-width:3px, margin:15px;
+    classDef ideaStyle fill:lightgreen, color:black, rx:15, ry:15, stroke:black, stroke-width:3px, margin:15px;
+    classDef langStyle fill:blue, color:white, rx:15, ry:15, stroke:black, stroke-width:3px, margin:15px;
+    classDef backStyle fill:darkblue, color:white, rx:15, ry:15, stroke:black, stroke-width:3px, margin:15px;
+    classDef frontStyle fill:coral, color:black, rx:15, ry:15, stroke:black, stroke-width:3px, margin:15px;
+    classDef frameStyle fill:purple, color:white, rx:15, ry:15, stroke:black, stroke-width:3px, margin:15px;
+    classDef toolStyle fill:yellow, color:black, stroke:black, stroke-width:3px, margin:15px;
+    classDef dbStyle fill:orange, color:black, stroke:black, stroke-width:3px, margin:15px;
+    classDef techStyle fill:green, color:white, rx:15, ry:15, stroke:black, stroke-width:3px, margin:15px;
+    classDef uncerStyle fill:red, color:white, rx:15, ry:15, stroke:black, stroke-width:3px, margin:15px;
+</div>
   
-  <div style="font-size: 28px;">
+<div style="font-size: 28px;">
 	<h3>Color Key:</h3>
     <ul>
       <li><span style="color: black; font-weight: bold;">Black</span>: APIs/Services</li>
@@ -126,12 +130,12 @@
       <li><span style="color: green; font-weight: bold;">Green</span>: Technologies</li>
       <li><span style="color: red; font-weight: bold;">Red</span>: Uncertain Aspects</li>
     </ul>
-  </div>
+</div>
   
-  <script type="module">
+<script type="module">
 	import mermaid from "https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs";
 	mermaid.initialize({
 	  startOnLoad: true
 	});
-  </script>
+ </script>
   
