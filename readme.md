@@ -7,7 +7,7 @@ Kun indie-pelinkehittäjällä on käytössään data tämän vuosikymmenen indi
 ['AppID']: {
 	'name', 
 	'release_date', 
-	'price', 
+	'initialprice', - original US price in cent
     	'windows',
 	'mac',
 	'linux',
@@ -19,7 +19,7 @@ Kun indie-pelinkehittäjällä on käytössään data tämän vuosikymmenen indi
 	'negative',
 	'estimated_owners',
     	'average_playtime_forever',
-    	'peak_ccu',
+    	'peak_ccu', (peak CCU yesterday)
 	'tags',
     	'pct_pos_total',
 	'num_reviews_total'
