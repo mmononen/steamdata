@@ -7,7 +7,7 @@ Kun indie-pelinkehittäjällä on käytössään data tämän vuosikymmenen indi
 ['AppID']: {
 	'name', 
 	'release_date', 
-	'initialprice', - original US price in cent
+	'price'
     	'windows',
 	'mac',
 	'linux',
