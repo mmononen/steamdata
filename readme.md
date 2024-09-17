@@ -8,9 +8,6 @@ Kun indie-pelinkehittäjällä on käytössään data tämän vuosikymmenen indi
 	'name', 
 	'release_date', 
 	'price'
-    	'windows',
-	'mac',
-	'linux',
 	'metacritic_score',
 	'recommendations',
 	'categories', 
@@ -32,7 +29,7 @@ Kun indie-pelinkehittäjällä on käytössään data tämän vuosikymmenen indi
     - top5 tagit
     - ilmaisten pelien prosenttiosuus
     - moninpelit vs. yksinpelit / moninpelihybridit vs. yksinpelihybridit
-    - käyttöjärjestelmien / alustojen prosenttiosuus
+    
 
 ### 1. Pelin suosion ja arvostelujen yhteys (käyttäjäarvostelut + MetaCritic):
 
