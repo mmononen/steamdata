@@ -23,7 +23,7 @@
     %% Define components
     A[Steam APIs]:::apiStyle
     A1[Kaggle Data]:::apiStyle
-    B[New Backend?]:::ideaStyle
+    B[Backend App]:::backStyle
     C{{MySQL Server}}:::cloudStyle
     D[(Database)]:::dbStyle
     D1[(Local Storage)]:::dbStyle
@@ -42,7 +42,8 @@
     %% Define technologies
     T1A[Jupyter Notebook]:::techStyle
     T1[Python]:::langStyle
-    T2[C# & Win Forms?]:::ideaStyle
+    T2[Windows Forms]:::frameStyle
+    T3[C#]:::langStyle
     T4[SQL]:::langStyle
     T5[HTML
     CSS
@@ -69,7 +70,7 @@
     F & T9 -->|Reporting| pres
     
     %% Technology associations
-    B --- T2
+    B --- T2 --- T3
     C --- T10
     H1 --- T1A
     H & T1A & I & T9 --- T1
