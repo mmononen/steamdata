@@ -3,39 +3,35 @@
   "WorkspaceRootPath": "D:\\Dropbox\\Royn Jako\\Projects\\SteamDB\\SteamSyncDB\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{5E3DA773-E365-4CFF-9C31-73DC107B4CEE}|SteamSyncDB.csproj|d:\\dropbox\\royn jako\\projects\\steamdb\\steamsyncdb\\mainform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{5E3DA773-E365-4CFF-9C31-73DC107B4CEE}|SteamSyncDB.csproj|solutionrelative:mainform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{5E3DA773-E365-4CFF-9C31-73DC107B4CEE}|SteamSyncDB.csproj|d:\\dropbox\\royn jako\\projects\\steamdb\\steamsyncdb\\steamsyncdb.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
+      "RelativeMoniker": "D:0:0:{5E3DA773-E365-4CFF-9C31-73DC107B4CEE}|SteamSyncDB.csproj|solutionrelative:steamsyncdb.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
     },
     {
       "AbsoluteMoniker": "D:0:0:{5E3DA773-E365-4CFF-9C31-73DC107B4CEE}|SteamSyncDB.csproj|d:\\dropbox\\royn jako\\projects\\steamdb\\steamsyncdb\\databasehandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{5E3DA773-E365-4CFF-9C31-73DC107B4CEE}|SteamSyncDB.csproj|solutionrelative:databasehandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{5E3DA773-E365-4CFF-9C31-73DC107B4CEE}|SteamSyncDB.csproj|d:\\dropbox\\royn jako\\projects\\steamdb\\steamsyncdb\\game.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{5E3DA773-E365-4CFF-9C31-73DC107B4CEE}|SteamSyncDB.csproj|solutionrelative:game.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{5E3DA773-E365-4CFF-9C31-73DC107B4CEE}|SteamSyncDB.csproj|d:\\dropbox\\royn jako\\projects\\steamdb\\steamsyncdb\\mainform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{5E3DA773-E365-4CFF-9C31-73DC107B4CEE}|SteamSyncDB.csproj|solutionrelative:mainform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5E3DA773-E365-4CFF-9C31-73DC107B4CEE}|SteamSyncDB.csproj|d:\\dropbox\\royn jako\\projects\\steamdb\\steamsyncdb\\db-config.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{5E3DA773-E365-4CFF-9C31-73DC107B4CEE}|SteamSyncDB.csproj|solutionrelative:db-config.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\royko\\.nuget\\packages\\steamkit2\\2.5.0\\readme.txt||{8B382828-6202-11D1-8870-0000F87579D2}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{5E3DA773-E365-4CFF-9C31-73DC107B4CEE}|SteamSyncDB.csproj|D:\\Dropbox\\Royn Jako\\Projects\\SteamDB\\SteamSyncDB\\mainform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
       "RelativeMoniker": "D:0:0:{5E3DA773-E365-4CFF-9C31-73DC107B4CEE}|SteamSyncDB.csproj|solutionrelative:mainform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{5E3DA773-E365-4CFF-9C31-73DC107B4CEE}|SteamSyncDB.csproj|d:\\dropbox\\royn jako\\projects\\steamdb\\steamsyncdb\\datafetcher.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{5E3DA773-E365-4CFF-9C31-73DC107B4CEE}|SteamSyncDB.csproj|solutionrelative:datafetcher.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\royko\\.nuget\\packages\\steamkit2\\2.5.0\\readme.txt||{8B382828-6202-11D1-8870-0000F87579D2}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{5E3DA773-E365-4CFF-9C31-73DC107B4CEE}|SteamSyncDB.csproj|d:\\dropbox\\royn jako\\projects\\steamdb\\steamsyncdb\\steamsyncdb.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
-      "RelativeMoniker": "D:0:0:{5E3DA773-E365-4CFF-9C31-73DC107B4CEE}|SteamSyncDB.csproj|solutionrelative:steamsyncdb.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{5E3DA773-E365-4CFF-9C31-73DC107B4CEE}|SteamSyncDB.csproj|d:\\dropbox\\royn jako\\projects\\steamdb\\steamsyncdb\\mainform.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{5E3DA773-E365-4CFF-9C31-73DC107B4CEE}|SteamSyncDB.csproj|solutionrelative:mainform.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{5E3DA773-E365-4CFF-9C31-73DC107B4CEE}|SteamSyncDB.csproj|d:\\dropbox\\royn jako\\projects\\steamdb\\steamsyncdb\\db-config.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
-      "RelativeMoniker": "D:0:0:{5E3DA773-E365-4CFF-9C31-73DC107B4CEE}|SteamSyncDB.csproj|solutionrelative:db-config.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+      "AbsoluteMoniker": "D:0:0:{5E3DA773-E365-4CFF-9C31-73DC107B4CEE}|SteamSyncDB.csproj|d:\\dropbox\\royn jako\\projects\\steamdb\\steamsyncdb\\datafetcher.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{5E3DA773-E365-4CFF-9C31-73DC107B4CEE}|SteamSyncDB.csproj|solutionrelative:datafetcher.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{5E3DA773-E365-4CFF-9C31-73DC107B4CEE}|SteamSyncDB.csproj|d:\\dropbox\\royn jako\\projects\\steamdb\\steamsyncdb\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -53,70 +49,20 @@
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "Game.cs",
-              "DocumentMoniker": "D:\\Dropbox\\Royn Jako\\Projects\\SteamDB\\SteamSyncDB\\Game.cs",
-              "RelativeDocumentMoniker": "Game.cs",
-              "ToolTip": "D:\\Dropbox\\Royn Jako\\Projects\\SteamDB\\SteamSyncDB\\Game.cs",
-              "RelativeToolTip": "Game.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAACQAAAAFAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-09-16T13:03:23.43Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "DataFetcher.cs",
-              "DocumentMoniker": "D:\\Dropbox\\Royn Jako\\Projects\\SteamDB\\SteamSyncDB\\DataFetcher.cs",
-              "RelativeDocumentMoniker": "DataFetcher.cs",
-              "ToolTip": "D:\\Dropbox\\Royn Jako\\Projects\\SteamDB\\SteamSyncDB\\DataFetcher.cs",
-              "RelativeToolTip": "DataFetcher.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAQAAAAdAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-09-16T12:37:47.194Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 5,
-              "Title": "readme.txt",
-              "DocumentMoniker": "C:\\Users\\royko\\.nuget\\packages\\steamkit2\\2.5.0\\readme.txt",
-              "ToolTip": "C:\\Users\\royko\\.nuget\\packages\\steamkit2\\2.5.0\\readme.txt",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003109|",
-              "WhenOpened": "2024-09-16T12:34:48.532Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 7,
-              "Title": "MainForm.Designer.cs",
-              "DocumentMoniker": "D:\\Dropbox\\Royn Jako\\Projects\\SteamDB\\SteamSyncDB\\MainForm.Designer.cs",
-              "RelativeDocumentMoniker": "MainForm.Designer.cs",
-              "ToolTip": "D:\\Dropbox\\Royn Jako\\Projects\\SteamDB\\SteamSyncDB\\MainForm.Designer.cs",
-              "RelativeToolTip": "MainForm.Designer.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-09-16T10:21:26.912Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
               "DocumentIndex": 1,
               "Title": "DatabaseHandler.cs",
               "DocumentMoniker": "D:\\Dropbox\\Royn Jako\\Projects\\SteamDB\\SteamSyncDB\\DatabaseHandler.cs",
               "RelativeDocumentMoniker": "DatabaseHandler.cs",
               "ToolTip": "D:\\Dropbox\\Royn Jako\\Projects\\SteamDB\\SteamSyncDB\\DatabaseHandler.cs",
               "RelativeToolTip": "DatabaseHandler.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAcAAAARAAAAAAAAAA==",
+              "ViewState": "AgIAAPsAAAAAAAAAAAAgwP4AAAAzAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-09-16T09:07:47.363Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 8,
+              "DocumentIndex": 3,
               "Title": "db-config.json",
               "DocumentMoniker": "D:\\Dropbox\\Royn Jako\\Projects\\SteamDB\\SteamSyncDB\\db-config.json",
               "RelativeDocumentMoniker": "db-config.json",
@@ -129,7 +75,55 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 2,
+              "Title": "MainForm.cs",
+              "DocumentMoniker": "D:\\Dropbox\\Royn Jako\\Projects\\SteamDB\\SteamSyncDB\\MainForm.cs",
+              "RelativeDocumentMoniker": "MainForm.cs",
+              "ToolTip": "D:\\Dropbox\\Royn Jako\\Projects\\SteamDB\\SteamSyncDB\\MainForm.cs",
+              "RelativeToolTip": "MainForm.cs",
+              "ViewState": "AgIAAE4CAAAAAAAAAADgv6YCAAA+AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-09-13T13:44:31.478Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "readme.txt",
+              "DocumentMoniker": "C:\\Users\\royko\\.nuget\\packages\\steamkit2\\2.5.0\\readme.txt",
+              "ToolTip": "C:\\Users\\royko\\.nuget\\packages\\steamkit2\\2.5.0\\readme.txt",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003109|",
+              "WhenOpened": "2024-09-16T12:34:48.532Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "MainForm.Designer.cs",
+              "DocumentMoniker": "D:\\Dropbox\\Royn Jako\\Projects\\SteamDB\\SteamSyncDB\\MainForm.Designer.cs",
+              "RelativeDocumentMoniker": "MainForm.Designer.cs",
+              "ToolTip": "D:\\Dropbox\\Royn Jako\\Projects\\SteamDB\\SteamSyncDB\\MainForm.Designer.cs",
+              "RelativeToolTip": "MainForm.Designer.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-09-16T10:21:26.912Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "DataFetcher.cs",
+              "DocumentMoniker": "D:\\Dropbox\\Royn Jako\\Projects\\SteamDB\\SteamSyncDB\\DataFetcher.cs",
+              "RelativeDocumentMoniker": "DataFetcher.cs",
+              "ToolTip": "D:\\Dropbox\\Royn Jako\\Projects\\SteamDB\\SteamSyncDB\\DataFetcher.cs",
+              "RelativeToolTip": "DataFetcher.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAQAAAAdAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-09-16T12:37:47.194Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
               "Title": "MainForm.cs [Design]",
               "DocumentMoniker": "D:\\Dropbox\\Royn Jako\\Projects\\SteamDB\\SteamSyncDB\\MainForm.cs",
               "RelativeDocumentMoniker": "MainForm.cs",
@@ -141,7 +135,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 9,
+              "DocumentIndex": 8,
               "Title": "Program.cs",
               "DocumentMoniker": "D:\\Dropbox\\Royn Jako\\Projects\\SteamDB\\SteamSyncDB\\Program.cs",
               "RelativeDocumentMoniker": "Program.cs",
@@ -149,25 +143,11 @@
               "RelativeToolTip": "Program.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAAAsAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-09-13T14:03:01.858Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-09-13T14:03:01.858Z"
             },
             {
               "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "MainForm.cs",
-              "DocumentMoniker": "D:\\Dropbox\\Royn Jako\\Projects\\SteamDB\\SteamSyncDB\\MainForm.cs",
-              "RelativeDocumentMoniker": "MainForm.cs",
-              "ToolTip": "D:\\Dropbox\\Royn Jako\\Projects\\SteamDB\\SteamSyncDB\\MainForm.cs",
-              "RelativeToolTip": "MainForm.cs",
-              "ViewState": "AgIAAE8AAAAAAAAAAADwv3MAAAASAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-09-13T13:44:31.478Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 6,
               "Title": "SteamSyncDB.csproj",
               "DocumentMoniker": "D:\\Dropbox\\Royn Jako\\Projects\\SteamDB\\SteamSyncDB\\SteamSyncDB.csproj",
               "RelativeDocumentMoniker": "SteamSyncDB.csproj",
