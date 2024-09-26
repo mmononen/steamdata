@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("SteamSyncDB")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Release")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+048b0c3546aef90a075390b98d22a1e4e1ec5e29")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+6000679b14c168d821305e9cafd7727c7808bfe1")]
 [assembly: System.Reflection.AssemblyProductAttribute("SteamSyncDB")]
 [assembly: System.Reflection.AssemblyTitleAttribute("SteamSyncDB")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

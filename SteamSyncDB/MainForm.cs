@@ -4,6 +4,7 @@ using System.Data;
 using System.Globalization;
 using System.Net.Http.Json;
 using System.Text;
+using SteamSyncDB;
 
 namespace SteamSyncDB
 {
@@ -11,6 +12,8 @@ namespace SteamSyncDB
     {
         private DataGridView dataGridView;
         private DataGridView dbDataGridView;
+        private Button btnApplyFilters;
+        private Button btnClearFilters;
         private Button btnImportCSV;
         private Button btnExportCSV;
         private Button btnFetchSteamData;
@@ -19,9 +22,12 @@ namespace SteamSyncDB
         private Button btnPullDBData;
         private Button btnPushUpdateDBData;
         private Button btnBatchPushDBData;
+        private Button btnPurgeDBData;
         private TextBox txtNameFilter;
         //private TextBox txtTagFilter;
         private TextBox txtGenreTagFilter;
+        private DateTimePicker startDatePicker;
+        private DateTimePicker endDatePicker;
         private TextBox consoleView;
         private DatabaseHandler dbHandler;
         private DataTable gameTable;
@@ -42,6 +48,14 @@ namespace SteamSyncDB
             dbHandler = new DatabaseHandler(this);
         }
 
+        // Enum for validation method
+        public enum ValidationResult
+        {
+            Valid,
+            Invalid,
+            Duplicate
+        }
+
         private void CustomInitialize()
         {
             this.consoleView = new TextBox();
@@ -56,6 +70,7 @@ namespace SteamSyncDB
             ConsoleView();
             InitializeRowCountLabel();
             //FormControls();
+            InitializeDatePickers();
             InitializeLayout();
 
             Log("Form initialization complete");
@@ -66,6 +81,7 @@ namespace SteamSyncDB
 
         private void InitializeButtons()
         {
+            FilterBtns();
             ImportCSVBtn();
             ExportCSVBtn();
             FetchSteamDataBtn();
@@ -74,6 +90,7 @@ namespace SteamSyncDB
             PullDBDataBtn();
             PushDBUpdateDataBtn();
             BatchPushDBDataBtn();
+            PurgeDBDataBtn();
         }
 
         private void InitializeTable(DataTable table)
@@ -82,8 +99,8 @@ namespace SteamSyncDB
             {
                 table.Columns.Add("AppID", typeof(int));
                 table.Columns.Add("name", typeof(string));
-                table.Columns.Add("release_date", typeof(DateTime));
-                table.Columns.Add("price", typeof(decimal));
+                table.Columns.Add("release_date", typeof(string));
+                table.Columns.Add("price", typeof(string));
                 table.Columns.Add("metacritic_score", typeof(int));
                 table.Columns.Add("recommendations", typeof(int));
                 table.Columns.Add("categories", typeof(string));
@@ -94,7 +111,7 @@ namespace SteamSyncDB
                 table.Columns.Add("average_playtime_forever", typeof(int));
                 table.Columns.Add("peak_ccu", typeof(int));
                 table.Columns.Add("tags", typeof(string));
-                table.Columns.Add("pct_pos_total", typeof(decimal));
+                table.Columns.Add("pct_pos_total", typeof(string));
                 table.Columns.Add("num_reviews_total", typeof(int));
             }
         }
@@ -138,7 +155,7 @@ namespace SteamSyncDB
             rowCountLabel.Location = new System.Drawing.Point(20, 850);
             rowCountLabel.Size = new System.Drawing.Size(200, 20);
             this.rowCountLabel.Anchor = (AnchorStyles.Bottom | AnchorStyles.Left);
-            rowCountLabel.Text = $"Row count: ";
+            rowCountLabel.Text = $"Imported row count: ";
             this.Controls.Add(rowCountLabel);
         }
 
@@ -149,13 +166,13 @@ namespace SteamSyncDB
         //    {
         //        BeginInvoke((MethodInvoker)delegate {
         //            int rowCount = dataGridView.Rows.Cast<DataGridViewRow>().Count(row => row.Visible);
-        //            rowCountLabel.Text = $"Row count: {rowCount}";
+        //            rowCountLabel.Text = $"Imported row count: {rowCount}";
         //        });
         //    }
         //    else
         //    {
         //        int rowCount = dataGridView.Rows.Cast<DataGridViewRow>().Count(row => row.Visible);
-        //        rowCountLabel.Text = $"Row count: {rowCount}";
+        //        rowCountLabel.Text = $"Imported row count: {rowCount}";
         //    }
         //}
 
@@ -173,7 +190,7 @@ namespace SteamSyncDB
             var controlsPanel = new TableLayoutPanel()
             {
                 Dock = DockStyle.Fill,
-                ColumnCount = 12,
+                ColumnCount = 20,
                 RowCount = 1,
                 BackColor = Color.LightGray,
             };
@@ -185,6 +202,10 @@ namespace SteamSyncDB
                 RowCount = 2,
                 BackColor = Color.LightGray,
             };
+
+            var emptySpace1 = new Label() { Width = 30 };
+            var emptySpace2 = new Label() { Width = 60 };
+            var emptySpace3 = new Label() { Width = 60 };
 
             tableLayoutPanel.RowStyles.Add(new RowStyle(SizeType.Absolute, 50));
             tableLayoutPanel.RowStyles.Add(new RowStyle(SizeType.Percent, 40));
@@ -198,14 +219,22 @@ namespace SteamSyncDB
 
             controlsPanel.Controls.Add(txtNameFilter, 0, 0);
             controlsPanel.Controls.Add(txtGenreTagFilter, 1, 0);
-            controlsPanel.Controls.Add(btnImportCSV, 3, 0);
-            controlsPanel.Controls.Add(btnExportCSV, 4, 0);
-            controlsPanel.Controls.Add(btnFetchSteamData, 5, 0);
-            controlsPanel.Controls.Add(btnTestDBConnection, 6, 0);
-            controlsPanel.Controls.Add(btnValidateGameData, 7, 0);
-            controlsPanel.Controls.Add(btnPullDBData, 8, 0);
-            controlsPanel.Controls.Add(btnPushUpdateDBData, 9, 0);
-            controlsPanel.Controls.Add(btnBatchPushDBData, 10, 0);
+            controlsPanel.Controls.Add(startDatePicker, 2, 0);
+            controlsPanel.Controls.Add(endDatePicker, 3, 0);
+            controlsPanel.Controls.Add(btnApplyFilters, 4, 0);
+            controlsPanel.Controls.Add(btnClearFilters, 5, 0);
+            controlsPanel.Controls.Add(emptySpace1, 6, 0);
+            controlsPanel.Controls.Add(btnImportCSV, 7, 0);
+            controlsPanel.Controls.Add(btnExportCSV, 8, 0);
+            controlsPanel.Controls.Add(btnFetchSteamData, 9, 0);
+            controlsPanel.Controls.Add(emptySpace2, 10, 0);
+            controlsPanel.Controls.Add(btnTestDBConnection, 11, 0);
+            controlsPanel.Controls.Add(btnPullDBData, 12, 0);
+            controlsPanel.Controls.Add(btnValidateGameData, 13, 0);
+            controlsPanel.Controls.Add(btnPushUpdateDBData, 14, 0);
+            controlsPanel.Controls.Add(btnBatchPushDBData, 15, 0);
+            controlsPanel.Controls.Add(emptySpace3, 16, 0);
+            controlsPanel.Controls.Add(btnPurgeDBData, 17, 0);
 
             consolePanel.RowStyles.Add(new RowStyle(SizeType.Percent, 10));
             consolePanel.RowStyles.Add(new RowStyle(SizeType.Percent, 90));
@@ -236,6 +265,24 @@ namespace SteamSyncDB
                 AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill,
                 AllowUserToAddRows = false
             };
+        }
+
+        private void FilterBtns()
+        {
+            Log("Initializing filter buttons");
+            btnApplyFilters = new Button
+            {
+                Text = "Apply Filters",
+                Width = 100
+            };
+            btnApplyFilters.Click += BtnApplyFilters_Click;
+
+            btnClearFilters = new Button
+            {
+                Text = "Clear Filters",
+                Width = 100
+            };
+            btnClearFilters.Click += BtnClearFilters_Click;
         }
         private void ImportCSVBtn()
         {
@@ -269,7 +316,6 @@ namespace SteamSyncDB
             this.btnTestDBConnection.Text = "Test DB Connection";
             this.btnTestDBConnection.Dock = DockStyle.Fill;
             this.btnTestDBConnection.Click += new EventHandler(this.btnTestDBConnection_Click);
-
         }
 
         private void ValidateGameDataBtn()
@@ -306,6 +352,15 @@ namespace SteamSyncDB
             this.btnBatchPushDBData.Click += new EventHandler(this.btnBatchPushDBData_Click);
         }
 
+        private void PurgeDBDataBtn()
+        {
+            Log("Initializing purge database button");
+            this.btnPurgeDBData = new Button();
+            this.btnPurgeDBData.Text = "Purge DB";
+            this.btnPurgeDBData.Dock = DockStyle.Fill;
+            this.btnPurgeDBData.Click += new EventHandler(this.btnPurgeDBData_Click);
+        }
+
         private void NameFilterTextBox()
         {
             Log("Initializing name filter name box");
@@ -325,6 +380,26 @@ namespace SteamSyncDB
             this.txtGenreTagFilter.KeyDown += new KeyEventHandler(this.ApplyFilters_KeyDown);
             //this.Controls.Add(txtGenreTagFilter);
         }
+
+        private void InitializeDatePickers()
+        {
+            Log("Initializing Date Picker");
+            startDatePicker = new DateTimePicker
+            {
+                Format = DateTimePickerFormat.Short,
+                Width = 100
+            };
+
+            startDatePicker.Value = DateTime.Today.AddYears(-40);
+
+            // End Date Picker
+            endDatePicker = new DateTimePicker
+            {
+                Format = DateTimePickerFormat.Short,
+                Width = 100
+            };
+        }
+
         private void ConsoleView()
         {
             Log("Initializing console");
@@ -411,11 +486,13 @@ namespace SteamSyncDB
             gameTable.Clear();
             gameTable.Columns.Clear();
 
-            Log($"Opening and reading CSV file: {filePath}");
 
             Log("Suspending layout for better performance");
             dataGridView.SuspendLayout();
 
+            importGames.Clear();
+
+            Log($"Opening and reading CSV file: {filePath}");
             using (StreamReader reader = new StreamReader(filePath))
             {
                 Log("Reading first row for header information.");
@@ -447,11 +524,22 @@ namespace SteamSyncDB
                     {
                         var game = ParseGameFromCsvLine(line, columnIndices);
                         gameTable.Rows.Add(
-                            game.AppID, game.Name, game.ReleaseDate, game.Price, game.MetacriticScore,
-                            game.Recommendations, string.Join(", ", game.Categories),
-                            string.Join(", ", game.Genres), game.Positive, game.Negative,
-                            game.EstimatedOwners, game.AveragePlaytime, game.PeakCcu,
-                            string.Join(", ", game.Tags), game.PctPosTotal, game.NumReviews);
+                            game.AppID,
+                            game.Name, 
+                            game.ReleaseDate.ToString("yyyy-MM-dd"), 
+                            game.Price.ToString("0.00", CultureInfo.InvariantCulture), 
+                            game.MetacriticScore,
+                            game.Recommendations, 
+                            string.Join(", ", game.Categories),
+                            string.Join(", ", game.Genres), 
+                            game.Positive, 
+                            game.Negative,
+                            game.EstimatedOwners, 
+                            game.AveragePlaytime, 
+                            game.PeakCcu,
+                            string.Join(", ", game.Tags),
+                            game.PctPosTotal.ToString("0.00", CultureInfo.InvariantCulture), 
+                            game.NumReviews);
 
                         importGames.Add(game);
                         rowCounter++;
@@ -468,12 +556,14 @@ namespace SteamSyncDB
             dataGridView.DataSource = gameView;
 
             dataGridView.ResumeLayout();
-            rowCountLabel.Text = $"Row count: {rowCounter}";
+            rowCountLabel.Text = $"Imported row count: {rowCounter}";
         }
 
         private Game ParseGameFromCsvLine(string line, List<int> columnIndices)
         {
             var values = ParseCsvLine(line);
+
+            // Ensure decimal is period
             string priceString = values[columnIndices[3]].Replace(',', '.');
 
             var game = new Game
@@ -492,25 +582,24 @@ namespace SteamSyncDB
                 AveragePlaytime = int.Parse(values[columnIndices[11]]),
                 PeakCcu = int.Parse(values[columnIndices[12]]),
                 Tags = ParseCurlyBracedList(values[columnIndices[13]]),
-                PctPosTotal = decimal.Parse(values[columnIndices[14]]),
+                PctPosTotal = decimal.Parse(values[columnIndices[14]], CultureInfo.InvariantCulture),
                 NumReviews = int.Parse(values[columnIndices[15]])
             };
 
             return game;
         }
 
+        // Remove brackets
         private List<string> ParseBracketedList(string input)
         {
             return input.Trim('[', ']').Split(',').Select(item => item.Trim()).ToList();
         }
-
+        // Remove curly braces
         private List<string> ParseCurlyBracedList(string input)
         {
             return input.Trim('{', '}').Split(',').Select(item => item.Split(':')[0].Trim()).ToList();
         }
-
-
-        // Helper function to handle quoted fields
+        // Handle quoted fields
         private string[] ParseCsvLine(string line)
         {
             List<string> result = new List<string>();
@@ -539,7 +628,6 @@ namespace SteamSyncDB
             result.Add(value.ToString());
             return result.ToArray();
         }
-
         private void btnExportCSV_Click(object sender, EventArgs e)
         {
             Log("Starting .csv data export");
@@ -579,25 +667,21 @@ namespace SteamSyncDB
                         {
                             var cellValue = row.Cells[i].Value;
 
-                            if (cellValue is decimal decimalValue)
+                            string formattedValue = cellValue switch
                             {
-                                writer.Write(decimalValue.ToString(CultureInfo.InvariantCulture));
-                            }
-                            else if (cellValue is double doubleValue)
-                            {
-                                writer.Write(doubleValue.ToString(CultureInfo.InvariantCulture));
-                            }
-                            else
-                            {
-                                var stringValue = cellValue?.ToString() ?? "";
+                                DateTime dateTimeValue => dateTimeValue.ToString("yyyy-MM-dd"),
+                                decimal decimalValue => decimalValue.ToString("0.00", CultureInfo.InvariantCulture),
+                                double doubleValue => doubleValue.ToString("0.00", CultureInfo.InvariantCulture),
+                                _ => cellValue?.ToString() ?? ""
+                            };
 
-                                if (stringValue.Contains(",") || stringValue.Contains("\"") || stringValue.Contains("\n"))
-                                {
-                                    stringValue = $"\"{stringValue.Replace("\"", "\"\"")}\"";
-                                }
-
-                                writer.Write(stringValue);
+                            // Handle special characters in the CSV (comma, quotes, etc.)
+                            if (formattedValue.Contains(",") || formattedValue.Contains("\"") || formattedValue.Contains("\n"))
+                            {
+                                formattedValue = $"\"{formattedValue.Replace("\"", "\"\"")}\"";
                             }
+
+                            writer.Write(formattedValue);
 
                             if (i < dataGridView.Columns.Count - 1)
                                 writer.Write(",");
@@ -612,35 +696,41 @@ namespace SteamSyncDB
         {
             // TO DO
         }
-
         private async void btnTestDBConnection_Click(object sender, EventArgs e)
         {
             dbHandler.TestConnection();
         }
 
+        // Validate and compare import data with db data
         private async void btnValidateGameData_Click(object sender, EventArgs e)
         {
             int rowCounter = 0;
             int validCounter = 0;
             int invalidCounter = 0;
+            int duplicateCounter = 0;
 
-            List<Game> invalidGames = new List<Game>();
+            List<Game> validGames = new List<Game>();
 
             Log("Starting data validation...");
-            foreach (var game in importGames.ToList()) // Use .ToList() to avoid modifying the collection during iteration
+
+            foreach (var importedGame in importGames.ToList())
             {
-                bool isValid = dbHandler.ValidateGameData(game);
+                var dbGame = dbGames.FirstOrDefault(g => g.AppID == importedGame.AppID);
+                var result = ValidateGameData(importedGame, dbGame);
                 rowCounter++;
 
-                if (isValid) 
-                { 
-                    validCounter++; 
-                } 
-                else 
+                switch (result)
                 {
-                    Log($"Game {game.AppID} - {game.Name}: Invalid");
-                    invalidCounter++;
-                    invalidGames.Add(game);
+                    case ValidationResult.Valid:
+                        validGames.Add(importedGame);
+                        validCounter++;
+                        break;
+                    case ValidationResult.Invalid:
+                        invalidCounter++;
+                        break;
+                    case ValidationResult.Duplicate:
+                        duplicateCounter++;
+                        break;
                 }
 
                 if (rowCounter % 1000 == 0)
@@ -649,72 +739,144 @@ namespace SteamSyncDB
                 }
             }
 
-            Log("Removing invalid games from DataGridView and games list. Please wait.");
-            foreach (var invalidGame in invalidGames)
+            importGames = validGames;
+
+
+            // Update view with only valid data
+            Log("Updating DataGridView with valid games. Please wait.");
+            dataGridView.DataSource = null;  // Unbind the DataGridView from the data source
+
+            //Log(gameTable.ToString());
+            //if (gameTable == null) { return; }
+
+            gameTable.Clear();  // Clear the DataTable
+            gameTable.Columns.Clear();  // Clear the columns
+
+            InitializeTable(gameTable);
+
+            // Re-populate the DataTable with valid games
+            foreach (var validGame in validGames)
             {
-                Log($"Removing game {invalidGame.AppID.ToString()} from games list");
-                importGames.Remove(invalidGame);
+                //if (validGame == null)
+                //{
+                //    continue;
+                //}
 
-                dataGridView.SuspendLayout();
-
-                Log($"Removing game {invalidGame.AppID.ToString()} from DataGridView");
-                foreach (DataGridViewRow row in dataGridView.Rows)
+                try
                 {
-                    if (row.Cells["AppID"].Value.ToString() == invalidGame.AppID.ToString())
-                    {
-                        dataGridView.Rows.Remove(row);
-                        break;
-                    }
+                    gameTable.Rows.Add(
+                        validGame.AppID,
+                        validGame.Name ?? string.Empty,
+                        validGame.ReleaseDate.ToString("yyyy-MM-dd"),
+                        validGame.Price.ToString("0.00", CultureInfo.InvariantCulture),
+                        validGame.MetacriticScore,
+                        validGame.Recommendations,
+                        string.Join(", ", validGame.Categories ?? new List<string>()),
+                        string.Join(", ", validGame.Genres ?? new List<string>()),
+                        validGame.Positive,
+                        validGame.Negative,
+                        validGame.EstimatedOwners ?? string.Empty,
+                        validGame.AveragePlaytime,
+                        validGame.PeakCcu,
+                        string.Join(", ", validGame.Tags ?? new List<string>()),
+                        validGame.PctPosTotal.ToString("0.00", CultureInfo.InvariantCulture),
+                        validGame.NumReviews
+                    );
                 }
+                catch (Exception ex)
+                {
 
-                dataGridView.ResumeLayout();
+                    Log($"Error adding game AppID={validGame.AppID}, Name={validGame.Name}: {ex.Message}");
+                    continue;
+                }
             }
 
-            Log($"Data validation complete. {validCounter} valid, {invalidCounter} invalid.");
-            rowCountLabel.Text = $"Row count: {validCounter}";
-        }
+            dataGridView.DataSource = gameView;
 
+            Log($"Data validation complete. {validCounter} valid, {invalidCounter} invalid, {duplicateCounter} duplicates.");
+            rowCountLabel.Text = $"Imported row count: {validCounter}";
+        }
+        public ValidationResult ValidateGameData(Game importedGame, Game dbGame)
+        {
+            // Basic validation
+            if (importedGame.AppID <= 0 || string.IsNullOrEmpty(importedGame.Name))
+            { return ValidationResult.Invalid; }
+
+            // Assume valid if not found in db
+            if (dbGame == null)
+            { return ValidationResult.Valid; }
+
+            // Sort lists for comparison
+            var sortedImportedTags = importedGame.Tags.OrderBy(t => t).ToList();
+            var sortedDbTags = dbGame.Tags.OrderBy(t => t).ToList();
+            var sortedImportedGenres = importedGame.Genres.OrderBy(g => g).ToList();
+            var sortedDbGenres = dbGame.Genres.OrderBy(g => g).ToList();
+            var sortedImportedCategories = importedGame.Categories.OrderBy(g => g).ToList();
+            var sortedDbCategories = dbGame.Categories.OrderBy(g => g).ToList();
+
+            // Check for duplicate data
+            if (
+                sortedImportedTags.SequenceEqual(sortedDbTags) &&
+                sortedImportedGenres.SequenceEqual(sortedDbGenres) &&
+                sortedImportedCategories.SequenceEqual(sortedDbCategories) &&
+                importedGame.Price == dbGame.Price &&
+                importedGame.ReleaseDate == dbGame.ReleaseDate &&
+                importedGame.MetacriticScore == dbGame.MetacriticScore &&
+                importedGame.Recommendations == dbGame.Recommendations &&
+                importedGame.Positive == dbGame.Positive &&
+                importedGame.Negative == dbGame.Negative &&
+                importedGame.EstimatedOwners == dbGame.EstimatedOwners &&
+                importedGame.AveragePlaytime == dbGame.AveragePlaytime &&
+                importedGame.PeakCcu == dbGame.PeakCcu &&
+                importedGame.PctPosTotal == dbGame.PctPosTotal &&
+                importedGame.NumReviews == dbGame.NumReviews)
+            {
+                return ValidationResult.Duplicate;
+            }
+
+            // Valid if no issues found
+            return ValidationResult.Valid;
+        }
         private async void btnPullDBData_Click(object sender, EventArgs e)
         {
             Log("Clearing existing data from DB Data Table.");
             dbGameTable.Clear();
+            dbGames.Clear();
 
-            Log("Starting batch data pull from the database...");
+            Log("Starting data pull from the database...");
 
-            int batchSize = 1000;
-            int totalPulled = 0;
+            var games = await dbHandler.PullAllGameDataAsync();
 
-            while (true)
+            Log("All data pulled, updating the UI...");
+
+            foreach (var game in games)
             {
-                Log($"Pulling next batch of {batchSize} games from the database...");
-                var gamesBatch = await dbHandler.PullGameDataBatchAsync(totalPulled, batchSize);
+                dbGameTable.Rows.Add(
+                    game.AppID,
+                    game.Name,
+                    game.ReleaseDate.ToString("yyyy-MM-dd"),
+                    game.Price.ToString("0.00", CultureInfo.InvariantCulture),
+                    game.MetacriticScore,
+                    game.Recommendations,
+                    string.Join(", ", game.Categories),
+                    string.Join(", ", game.Genres),
+                    game.Positive,
+                    game.Negative,
+                    game.EstimatedOwners,
+                    game.AveragePlaytime,
+                    game.PeakCcu,
+                    string.Join(", ", game.Tags),
+                    game.PctPosTotal.ToString("0.00", CultureInfo.InvariantCulture),
+                    game.NumReviews
+                );
 
-                if (gamesBatch.Count == 0)
-                {
-                    Log("No more data to pull.");
-                    break;
-                }
-
-                foreach (var game in gamesBatch)
-                {
-                    dbGameTable.Rows.Add(
-                        game.AppID, game.Name, game.ReleaseDate, game.Price, game.MetacriticScore,
-                        game.Recommendations, string.Join(", ", game.Categories), string.Join(", ", game.Genres),
-                        game.Positive, game.Negative, game.EstimatedOwners, game.AveragePlaytime,
-                        game.PeakCcu, string.Join(", ", game.Tags), game.PctPosTotal, game.NumReviews);
-                }
-
-                totalPulled += gamesBatch.Count;
-                Log($"Batch pull complete. {totalPulled} total games pulled so far.");
-
-                if (gamesBatch.Count < batchSize)
-                {
-                    Log("Final batch pulled. Data pull complete.");
-                    break;
-                }
+                dbGames.Add(game);
             }
+
+            Log($"Data pull complete. {games.Count} total games pulled.");
         }
 
+        // Update db with induvidual transactions
         private async void btnPushUpdateDBData_Click(object sender, EventArgs e)
         {
             Log("Starting update push to the database...");
@@ -741,6 +903,7 @@ namespace SteamSyncDB
             Log("Data update push to the database complete.");
         }
 
+        // Update db with bulk data batches
         private async void btnBatchPushDBData_Click(object sender, EventArgs e)
         {
             Log("Starting batch push to the database...");
@@ -766,31 +929,58 @@ namespace SteamSyncDB
             Log("Batch push to the database complete.");
         }
 
+        private void BtnApplyFilters_Click(object sender, EventArgs e)
+        {
+            ApplyFilters();
+        }
+
+        // Apply filters with Enter
         private void ApplyFilters_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Enter)
             {
-                string nameFilter = txtNameFilter.Text.ToLower();
-                string genreTagFilter = txtGenreTagFilter.Text.ToLower();
-
-                var filterList = new List<string>();
-
-                if (!string.IsNullOrEmpty(nameFilter))
-                    filterList.Add($"(Name LIKE '%{nameFilter}%')");
-
-                if (!string.IsNullOrEmpty(genreTagFilter))
-                    filterList.Add($"(Tags LIKE '%{genreTagFilter}%' OR Genres LIKE '%{genreTagFilter}%')");
-
-                gameView.RowFilter = string.Join(" AND ", filterList);
-
-                int visibleRowCount = gameView.Count;
-                rowCountLabel.Text = $"Row count: {visibleRowCount}";
-
-                UpdateImportGamesList();
-
+                ApplyFilters();
                 e.Handled = true;
                 e.SuppressKeyPress = true;
             }
+        }
+
+        private void ApplyFilters()
+        {
+            string nameFilter = txtNameFilter.Text.Replace("'", "''").ToLower();
+            string genreTagFilter = txtGenreTagFilter.Text.Replace("'", "''").ToLower();
+            DateTime startDate = startDatePicker.Value.Date;
+            DateTime endDate = endDatePicker.Value.Date;
+
+            var filterList = new List<string>();
+
+            if (!string.IsNullOrEmpty(nameFilter))
+                filterList.Add($"(Name LIKE '%{nameFilter}%')");
+
+            if (!string.IsNullOrEmpty(genreTagFilter))
+                filterList.Add($"(Tags LIKE '%{genreTagFilter}%' OR Genres LIKE '%{genreTagFilter}%')");
+
+            filterList.Add($"(release_date >= #{startDate:yyyy-MM-dd}# AND release_date <= #{endDate:yyyy-MM-dd}#)");
+
+            gameView.RowFilter = string.Join(" AND ", filterList);
+
+            int visibleRowCount = gameView.Count;
+            rowCountLabel.Text = $"Imported row count: {visibleRowCount}";
+
+            UpdateImportGamesList();
+        }
+
+        private void BtnClearFilters_Click(object sender, EventArgs e)
+        {
+            txtNameFilter.Text = string.Empty;
+            txtGenreTagFilter.Text = string.Empty;
+            startDatePicker.Value = DateTime.Today.AddYears(-40);
+            endDatePicker.Value = DateTime.Today;
+            gameView.RowFilter = string.Empty;
+
+            rowCountLabel.Text = $"Imported row count: {gameView.Count}";
+
+            UpdateImportGamesList();
         }
 
         private void UpdateImportGamesList()
@@ -817,7 +1007,7 @@ namespace SteamSyncDB
                     AveragePlaytime = Convert.ToInt32(row["average_playtime_forever"]),
                     Tags = row["tags"].ToString().Split(',').ToList(),
                     PeakCcu = Convert.ToInt32(row["peak_ccu"]),
-                    PctPosTotal = Convert.ToDecimal(row["pct_pos_total"]),
+                    PctPosTotal = Convert.ToDecimal(row["pct_pos_total"], CultureInfo.InvariantCulture),
                     NumReviews = Convert.ToInt32(row["num_reviews_total"])
                 };
 
@@ -825,6 +1015,31 @@ namespace SteamSyncDB
             }
         }
 
+        private async void btnPurgeDBData_Click(object sender, EventArgs e)
+        {
+            var confirmationResult = MessageBox.Show("Are you sure you want to delete all data from the database? This action cannot be undone.",
+                                                     "Confirm Purge",
+                                                     MessageBoxButtons.YesNo,
+                                                     MessageBoxIcon.Warning);
 
+            if (confirmationResult == DialogResult.Yes)
+            {
+                Log("Starting database purge...");
+                try
+                {
+                    await dbHandler.PurgeDatabaseAsync();
+                    MessageBox.Show("All data has been successfully purged from the database.", "Purge Complete", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+                catch (Exception ex)
+                {
+                    Log($"Error during database purge: {ex.Message}");
+                    MessageBox.Show("An error occurred during the purge process. Please check the logs for more details.", "Purge Failed", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+            else
+            {
+                Log("Database purge operation was cancelled.");
+            }
+        }
     }
 }
