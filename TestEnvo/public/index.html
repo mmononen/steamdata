@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Indie Game Database</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <h1>Indie Game Database</h1>
+    <p>Filter for indie games released after the year 2020</p>
+
+    <!-- Search Inputs Grid -->
+    <div class="search-grid">
+      <div class="grid-item">
+        <label for="appid">AppID:</label>
+        <input type="number" id="appid" placeholder="Enter AppID" />
+      </div>
+
+      <div class="grid-item">
+        <label for="name">Name:</label>
+        <input type="text" id="name" placeholder="Enter Name" />
+      </div>
+
+      <div class="grid-item">
+        <label for="category">Category:</label>
+        <select id="category">
+          <option value="">--Select Category--</option>
+        </select>
+      </div>
+
+      <div class="grid-item">
+        <label for="genre">Genre:</label>
+        <select id="genre">
+          <option value="">--Select Genre--</option>
+        </select>
+      </div>
+
+      <div class="grid-item">
+        <label for="tag">Tag:</label>
+        <select id="tag">
+          <option value="">--Select Tag--</option>
+        </select>
+      </div>
+    </div>
+
+    <!-- Search Button -->
+    <div class="search-button">
+      <button onclick="search()">Search</button>
+    </div>
+
+    <!-- Button to fetch the first 10 games -->
+    <div class="fetch-button">
+      <button onclick="fetchFirst10Games()">Fetch First 10 Games</button>
+    </div>
+
+    <!-- <h3>Result:</h3> -->
+    <div id="result">
+      <!-- Game results will be inserted here -->
+    </div>
+
+    <script src="app.js"></script>
+  </body>
+</html>
