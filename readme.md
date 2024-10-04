@@ -1,5 +1,7 @@
 ## Git Repository for ICT CAMP II 2024 Steamdata Data Project
 
+[Projektidiagrammi](https://mmononen.github.io/steamdata/)
+
 Kun indie-pelinkehittäjällä on käytössään data tämän vuosikymmenen indie-peleistä, jonka rakenne sisältää muun muassa pelin nimen, julkaisupäivän, genret, tagit, myynti- ja käyttäjätiedot, hän saattaa haluta vastauksia useisiin eri kysymyksiin. Näiden tietojen avulla kehittäjä voi ymmärtää paremmin markkinoiden tarpeita, kilpailua ja potentiaalisia menestystekijöitä. Tässä on joitakin keskeisiä kysymyksiä, joihin kehittäjä voisi haluta vastauksia:
 ## Datasta yhteisesti katsottavat asiat:
 
