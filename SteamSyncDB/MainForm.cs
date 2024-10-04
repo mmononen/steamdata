@@ -947,8 +947,8 @@ namespace SteamSyncDB
 
         private void ApplyFilters()
         {
-            string nameFilter = txtNameFilter.Text.Replace("'", "''").ToLower();
-            string genreTagFilter = txtGenreTagFilter.Text.Replace("'", "''").ToLower();
+            string nameFilter = txtNameFilter.Text.ToLower();
+            string genreTagFilter = txtGenreTagFilter.Text.ToLower();
             DateTime startDate = startDatePicker.Value.Date;
             DateTime endDate = endDatePicker.Value.Date;
 

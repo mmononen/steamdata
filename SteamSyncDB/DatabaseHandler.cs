@@ -35,9 +35,9 @@ namespace SteamSyncDB
         private MainForm mainForm;
 
         // Cache for categories, genres and tags while inserting data
-        private Dictionary<string, int> categoryCache = new Dictionary<string, int>();
-        private Dictionary<string, int> genreCache = new Dictionary<string, int>();
-        private Dictionary<string, int> tagCache = new Dictionary<string, int>();
+        private Dictionary<string, int> categoryCache = [];
+        private Dictionary<string, int> genreCache = [];
+        private Dictionary<string, int> tagCache = [];
 
 
         public DatabaseHandler(MainForm form)
@@ -449,7 +449,7 @@ namespace SteamSyncDB
             }
 
             if (tagValues.Length > 0)
-                tagValues.Length--; // Remove the trailing comma
+                tagValues.Length--;
 
             string gameTagInsertQuery = $@"
                 INSERT INTO game_tags (AppID, tag_id) VALUES 
@@ -527,7 +527,7 @@ namespace SteamSyncDB
                 using (var cmd = new MySqlCommand(gameTagInsertQuery, connection, transaction))
                 {
                     cmd.Parameters.AddWithValue("@AppID", appId);
-                    cmd.Parameters.AddWithValue("@TagID", tagId);  // Ensure @TagID is properly set
+                    cmd.Parameters.AddWithValue("@TagID", tagId);
                     await cmd.ExecuteNonQueryAsync();
                 }
             }

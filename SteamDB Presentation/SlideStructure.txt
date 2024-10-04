@@ -1,0 +1,73 @@
+Slide Structure Plan:
+Slide 1: Title Slide
+Title: "Comprehensive Contributions to SteamData® Project"
+Subtitle: "Database Design, Data Integration, and Application Development"
+Your Name: Roy Koljonen
+Date: September 2024
+
+Slide 2: Introduction
+Title: "Introduction to My Contributions"
+Content:
+
+Project Overview: Goals include gathering and analyzing game data, building a database, and creating an end-user application.
+My Role:
+Set up Azure Cloud database.
+Backend and frontend design for data management and user interaction.
+Slide 3: Database Table Reference Diagram
+Title: "Database Structure"
+Content:
+
+Diagram showcasing the relationships between indie_games, tags, and game_tags tables.
+Slide 4: SQL Commands and Many-to-Many Relations
+Title: "Database Structure Details"
+Content:
+
+SQL commands to create tables.
+Explanation of many-to-many relationships between games and tags.
+Example and foreign key explanation.
+Slide 5: Database Data (Screenshots)
+Title: "Data in the Database"
+Content:
+
+Show example screenshots of the indie_games, tags, and game_tags tables.
+Slide 6: Back End Application Architecture Diagram
+Title: "Back End Application Architecture"
+Content:
+
+Diagram explaining backend processes like CSV import, data validation, filtering, exporting, and database interaction.
+Slide 7: Key Backend Components (Validation, Filtering, Database Module)
+Title: "Key Backend Modules"
+Content:
+
+Validation Module: Ensures no duplicates and cross-references data.
+Filtering Module: Filters by name, genre, tag, date.
+Database Module: Manages batch pushes to Azure Cloud database.
+Slide 8: Front End Web Page Architecture Diagram
+Title: "Front-End Web Page Architecture"
+Content:
+
+Diagram of the user interface, API interaction, and data presentation flow.
+Slide 9: Data Filtering and Exporting
+Title: "Data Filtering and Exporting"
+Content:
+
+Details of filtering and export mechanisms for user-selected data.
+How filtered data is pushed to the database or exported as CSV.
+Slide 10: Testing and Validation
+Title: "Testing and Validation"
+Content:
+
+Brief overview of testing strategies applied to ensure data accuracy.
+Feedback loop and validation with real-world data.
+Slide 11: Conclusion
+Title: "Conclusion"
+Content:
+
+Summarize your contributions and impact on the project.
+Brief lessons learned and future possibilities.
+Slide 12: Q&A
+Title: "Questions & Answers"
+Content:
+
+Open the floor for questions.
+Optional: include a summary or closing remarks.

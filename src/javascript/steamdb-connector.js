@@ -14,43 +14,42 @@ if (config.ssl && config.ssl["ssl-mode"] === "REQUIRED") {
 const connection = mysql.createConnection(config);
 
 function fetchAllGames(limit, callback) {
-    const query = `
-        SELECT ig.appid, ig.name, ig.release_date, ig.price, ig.metacritic_score, ig.recommendations,
+    const query = 
+		`SELECT ig.appid, ig.name, ig.release_date, ig.price, ig.metacritic_score, ig.recommendations,
                GROUP_CONCAT(DISTINCT c.category_name ORDER BY c.category_name) AS categories,
                GROUP_CONCAT(DISTINCT g.genre_name ORDER BY g.genre_name) AS genres,
                ig.positive, ig.negative, ig.estimated_owners, ig.average_playtime_forever, ig.peak_ccu,
                GROUP_CONCAT(DISTINCT t.tag_name ORDER BY t.tag_name) AS tags,
                ig.pct_pos_total, ig.num_reviews_total
         FROM indie_games ig
-        LEFT JOIN game_categories gc ON ig.appid = gc.appid
-        LEFT JOIN categories c ON gc.category_id = c.category_id
-        LEFT JOIN game_genres gg ON ig.appid = gg.appid
-        LEFT JOIN genres g ON gg.genre_id = g.genre_id
-        LEFT JOIN game_tags gt ON ig.appid = gt.appid
-        LEFT JOIN tags t ON gt.tag_id = t.tag_id
-        GROUP BY ig.appid
-        LIMIT ?;
-    `;
+				LEFT JOIN game_categories gc ON ig.appid = gc.appid
+				LEFT JOIN categories c ON gc.category_id = c.category_id
+				LEFT JOIN game_genres gg ON ig.appid = gg.appid
+				LEFT JOIN genres g ON gg.genre_id = g.genre_id
+				LEFT JOIN game_tags gt ON ig.appid = gt.appid
+				LEFT JOIN tags t ON gt.tag_id = t.tag_id
+				GROUP BY ig.appid
+				LIMIT ?;`;
+
     connection.query(query, [limit], callback);
 }
 
-
 function fetchGameByAppid(appid, callback) {
-    const query = `
-        SELECT ig.appid, ig.name, ig.release_date, ig.price,
+    const query = 
+		`SELECT ig.appid, ig.name, ig.release_date, ig.price,
                GROUP_CONCAT(DISTINCT c.category_name ORDER BY c.category_name) AS categories,
                GROUP_CONCAT(DISTINCT g.genre_name ORDER BY g.genre_name) AS genres,
                GROUP_CONCAT(DISTINCT t.tag_name ORDER BY t.tag_name) AS tags
         FROM indie_games ig
-        LEFT JOIN game_categories gc ON ig.appid = gc.appid
-        LEFT JOIN categories c ON gc.category_id = c.category_id
-        LEFT JOIN game_genres gg ON ig.appid = gg.appid
-        LEFT JOIN genres g ON gg.genre_id = g.genre_id
-        LEFT JOIN game_tags gt ON ig.appid = gt.appid
-        LEFT JOIN tags t ON gt.tag_id = t.tag_id
-        WHERE ig.appid = ?
-        GROUP BY ig.appid;
-    `;
+				LEFT JOIN game_categories gc ON ig.appid = gc.appid
+				LEFT JOIN categories c ON gc.category_id = c.category_id
+				LEFT JOIN game_genres gg ON ig.appid = gg.appid
+				LEFT JOIN genres g ON gg.genre_id = g.genre_id
+				LEFT JOIN game_tags gt ON ig.appid = gt.appid
+				LEFT JOIN tags t ON gt.tag_id = t.tag_id
+				WHERE ig.appid = ?
+				GROUP BY ig.appid;`;
+
     connection.query(query, [appid], (err, results) => {
         if (err) {
             console.error("Error executing query:", err);
@@ -64,20 +63,19 @@ function fetchGameByAppid(appid, callback) {
 
 function searchGames(filters, callback) {
     const { name, category, genre, tag } = filters;
-    let query = `
-        SELECT ig.appid, ig.name, ig.release_date, ig.price,
+    let query = 
+		`SELECT ig.appid, ig.name, ig.release_date, ig.price,
                GROUP_CONCAT(DISTINCT c.category_name ORDER BY c.category_name) AS categories,
                GROUP_CONCAT(DISTINCT g.genre_name ORDER BY g.genre_name) AS genres,
                GROUP_CONCAT(DISTINCT t.tag_name ORDER BY t.tag_name) AS tags
         FROM indie_games ig
-        LEFT JOIN game_categories gc ON ig.appid = gc.appid
-        LEFT JOIN categories c ON gc.category_id = c.category_id
-        LEFT JOIN game_genres gg ON ig.appid = gg.appid
-        LEFT JOIN genres g ON gg.genre_id = g.genre_id
-        LEFT JOIN game_tags gt ON ig.appid = gt.appid
-        LEFT JOIN tags t ON gt.tag_id = t.tag_id
-        WHERE 1=1
-    `;
+				LEFT JOIN game_categories gc ON ig.appid = gc.appid
+				LEFT JOIN categories c ON gc.category_id = c.category_id
+				LEFT JOIN game_genres gg ON ig.appid = gg.appid
+				LEFT JOIN genres g ON gg.genre_id = g.genre_id
+				LEFT JOIN game_tags gt ON ig.appid = gt.appid
+				LEFT JOIN tags t ON gt.tag_id = t.tag_id
+				WHERE 1=1`;
     const queryParams = [];
 
     if (name) {

@@ -1,0 +1,38 @@
+%%{ init : { 
+  "theme" : "base",
+  "themeVariables": {
+    "lineColor": "white"
+  },
+  "flowchart": { "curve": "linear" }
+}}%%
+
+
+flowchart TD
+
+%% Subgraph for Front-End Web Page
+subgraph A[Front-End Web Page]
+    B[User Interface]:::frontStyle
+    D[Data Presentation]:::frontStyle
+end
+
+A:::subStyle
+
+C[API]:::backStyle
+E[Search & Filter]:::toolStyle
+H[(Database)]:::cloudStyle
+F[Game Details Page]:::frontStyle
+
+%% Define connections with actions
+B -->|Search & Filter| C
+C --->|Fetch Data| H
+C -->|Search & Filter| E
+E -->|Filter Results| D
+D -->|View Game Details| F
+
+
+%% Apply custom styles
+classDef subStyle fill:darkgrey, rx:15, ry:15, stroke:black, stroke-width:3px, font-weight:bold;
+classDef cloudStyle fill:cyan, color:black, stroke:black, stroke-width:3px, font-weight:bold;
+classDef backStyle fill:darkblue, color:white, rx:15, ry:15, stroke:black, stroke-width:3px, font-weight:bold;
+classDef frontStyle fill:coral, color:black, rx:15, ry:15, stroke:black, stroke-width:3px, font-weight:bold;
+classDef toolStyle fill:yellow, color:black, stroke:black, stroke-width:3px, font-weight:bold;

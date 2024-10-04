@@ -21,8 +21,9 @@
     flowchart BT;
     
     %% Define components
-    A[Steam APIs]:::apiStyle
+    A[Steam APIs]:::oosStyle
     A1[Kaggle Data]:::apiStyle
+    A2[Steam API]:::apiStyle
     B[Backend App]:::backStyle
     C{{MySQL Server}}:::cloudStyle
     D[(Database)]:::dbStyle
@@ -33,11 +34,9 @@
     H[Data Conversion]:::backStyle
     H1[Data Preprocessing]:::backStyle
     I[Data Filter]:::backStyle
-    J>Large Data Presentation]:::frontStyle
-    M[Data Migration]:::backStyle
-    K[Data Comparison]:::backStyle
-    L[How?]:::uncerStyle
-    L1[How?]:::uncerStyle
+    J>LLM Sentiment Presentation]:::frontStyle
+    M[Data Migration]:::obsStyle
+    K[Analysis]:::backStyle
     
     %% Define technologies
     T1A[Jupyter Notebook]:::techStyle
@@ -48,34 +47,38 @@
     T5[HTML
     CSS
     JavaScript]:::langStyle
-    T6[Node.js?]:::ideaStyle
-    T9[Streamlit]:::frameStyle
+    T6[Node.js]:::techStyle
+    T9[LLM]:::frameStyle
     T10[Azure Data Studio]:::toolStyle
+    T11[Gemma 2]:::techStyle
+    T12[Ollama]:::techStyle
+    T13[Docker]:::toolStyle
 
     
     %% Diagram connections
-    A ---->|Raw Data| B
-    A1 ---->|Raw Data .csv| D1
+    A --->|Raw Data| B
+    A1 -->|Raw Data .csv| D1
     B -->|Clean Data| C
     C <--->|Data & Queries| F
     D1 ---->|Raw Data .csv| H1
-    H1 ---->|Preprocessed Data .csv| I
+    H1 --->|Preprocessed Data .csv| I
     I ---->|Indie Filtered Data .csv| H
     I ---->|Filtered Data .csv| D1
     H -->|Converted Data .json| M
     H -->|Converted Data .json| D1
     M -->|Clean Data| C
-    D1 --->|Filtered Data .csv| T9
-    L1 --> B
+    A2 ---->|Game & Review Data| T9
     F & T9 -->|Reporting| pres
+    D1 --->|Indie Filtered Data .csv| B
     
     %% Technology associations
     B --- T2 --- T3
     C --- T10
     H1 --- T1A
     H & T1A & I & T9 --- T1
-    M & T10 --- T4
-
+    E & B & T10 & M --- T4
+    T9 --- T11 & T12 & T13
+    
     pres:::subStyle
 
     %% Subgraph for Presentations
@@ -94,7 +97,6 @@
 
     %% Subgraph for Front End
     subgraph front [Front End]
-    L --> E
     C <-->|Data & Queries| E
     E --- T6 & T5
     end
@@ -113,7 +115,8 @@
     classDef toolStyle fill:yellow, color:black, stroke:black, stroke-width:3px, margin:15px;
     classDef dbStyle fill:orange, color:black, stroke:black, stroke-width:3px, margin:15px;
     classDef techStyle fill:green, color:white, rx:15, ry:15, stroke:black, stroke-width:3px, margin:15px;
-    classDef uncerStyle fill:red, color:white, rx:15, ry:15, stroke:black, stroke-width:3px, margin:15px;
+    classDef oosStyle fill:red, color:white, rx:15, ry:15, stroke:black, stroke-width:3px, margin:15px;
+    classDef obsStyle fill:pink, color:black, rx:15, ry:15, stroke:black, stroke-width:3px, margin:15px;
 </div>
   
 <div style="font-size: 28px;">
@@ -129,7 +132,8 @@
       <li><span style="color: yellow; font-weight: bold;">Yellow</span>: Tools</li>
       <li><span style="color: orange; font-weight: bold;">Orange</span>: Data Storage</li>
       <li><span style="color: green; font-weight: bold;">Green</span>: Technologies</li>
-      <li><span style="color: red; font-weight: bold;">Red</span>: Uncertain Aspects</li>
+      <li><span style="color: red; font-weight: bold;">Red</span>: Out of Scope</li>
+      <li><span style="color: pink; font-weight: bold;">Pink</span>: Obsolete</li>
     </ul>
 </div>
   

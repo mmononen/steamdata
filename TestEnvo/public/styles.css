@@ -27,7 +27,6 @@ label {
   color: #a7bacc;
 }
 
-/* Button Styles */
 button {
   padding: 10px 20px;
   margin: 5px 0;
@@ -43,7 +42,7 @@ button:hover {
   background-color: #1b2838;
 }
 
-/* Input and Select Styles */
+/* Input and Select */
 input,
 select {
   padding: 10px;
@@ -64,7 +63,7 @@ select {
   margin-bottom: 40px;
 }
 
-/* Container for the entire game result */
+/* Container for all game results */
 .game-result {
   border: 1px solid #3d4450;
   max-width: 1000px;
@@ -74,12 +73,10 @@ select {
   border-radius: 8px;
 }
 
-/* Game Title */
 .game-title {
   margin-bottom: 10px;
 }
 
-/* Metadata Section */
 .game-meta {
   margin-bottom: 15px;
 }
