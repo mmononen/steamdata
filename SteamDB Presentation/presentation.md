@@ -6,7 +6,7 @@ date: 'October 2024'
 theme: gaia
 style: |
   section {
-    background: linear-gradient(120deg, #3B4252 50%, #2E3440 50%);
+    background: linear-gradient(120deg, #20242d 25%, #4b5468 100%);
     color: #D8DEE9;
   }
   .sub-title {
