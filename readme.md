@@ -1,4 +1,5 @@
 ## Git Repository for ICT CAMP II 2024 Steamdata Data Project
+(Database dropped as of 11th of October, 2024)
 
 [Projektidiagrammi](https://mmononen.github.io/steamdata/)
 
